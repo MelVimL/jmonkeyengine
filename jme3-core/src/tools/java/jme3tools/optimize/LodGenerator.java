@@ -110,6 +110,8 @@ public class LodGenerator {
     private float meshBoundingSphereRadius;
     final private Mesh mesh;
 
+    //private Map<TriangleReductionMethod, Build> builds = new HashMap<>();
+
     /**
      * Enumerate criteria for removing triangles.
      */
