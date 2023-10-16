@@ -549,7 +549,7 @@ public class LodGenerator {
             while (neededTriCount < tricount) {
                 Collections.sort(collapseCostSet, collapseComparator);
                 Iterator<Vertex> it = collapseCostSet.iterator();
-                
+
                 if (it.hasNext()) {
                     Vertex v = it.next();
                     if (v.collapseCost < collapseCostLimit) {
@@ -561,7 +561,7 @@ public class LodGenerator {
                             it2.next();
                             it2.remove();// Remove src from collapse costs.
                         }
-                        
+
                     } else {
                         break;
                     }
@@ -578,13 +578,21 @@ public class LodGenerator {
                 numBakedLods++;
             }
         }
-        if (numBakedLods <= lodCount) {
-            VertexBuffer[] bakedLods = new VertexBuffer[numBakedLods];
-            System.arraycopy(lods, 0, bakedLods, 0, numBakedLods);
-            return bakedLods;
-        } else {
-            return lods;
+        return cleaned(lods, numBakedLods);
+    }
+    
+    private VertexBuffer[] cleaned(VertexBuffer[] lods, int successes) {
+        VertexBuffer[] result = new VertexBuffer[successes];
+        int index = 0;
+
+        for (VertexBuffer vb : lods) {
+            if (vb != null) {
+                result[index] = vb;
+                index++;
+            }
+
         }
+        return result;
     }
 
     /**
